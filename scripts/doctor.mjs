@@ -23,10 +23,21 @@ function isAtLeast(actual, minimum) {
   return true;
 }
 
+function invocationFor(requirement) {
+  if (requirement.command === "npm" && process.env.npm_execpath) {
+    return {
+      command: process.execPath,
+      args: [process.env.npm_execpath, ...requirement.args],
+    };
+  }
+  return requirement;
+}
+
 let failed = false;
 for (const requirement of requirements) {
   try {
-    const output = execFileSync(requirement.command, requirement.args, {
+    const invocation = invocationFor(requirement);
+    const output = execFileSync(invocation.command, invocation.args, {
       encoding: "utf8",
       stdio: ["ignore", "pipe", "inherit"],
     }).trim();

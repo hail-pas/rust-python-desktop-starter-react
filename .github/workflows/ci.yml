@@ -37,8 +37,8 @@ jobs:
       - run: npm run python:test
       - run: npm run python:smoke
       - run: npm run python:lint
+      - run: npm run python:build
       - run: npm run rust:fmt
       - run: npm run rust:clippy
       - run: npm run rust:test
-      - run: npm run python:build
       - run: npm run desktop:compile
