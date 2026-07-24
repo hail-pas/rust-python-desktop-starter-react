@@ -1,0 +1,24 @@
+[package]
+name = "starter-desktop"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[lib]
+name = "starter_desktop_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[[bin]]
+name = "starter-desktop"
+path = "src/main.rs"
+
+[build-dependencies]
+tauri-build = { version = "=2.6.3", features = [] }
+
+[dependencies]
+app-contracts = { path = "../../../crates/app-contracts" }
+app-core = { path = "../../../crates/app-core" }
+python-host = { path = "../../../crates/python-host" }
+tauri.workspace = true
+tauri-plugin-shell.workspace = true

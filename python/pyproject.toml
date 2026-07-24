@@ -1,0 +1,36 @@
+[project]
+name = "starter-python-workspace"
+version = "0.5.0"
+requires-python = ">=3.13,<3.15"
+dependencies = []
+
+[dependency-groups]
+build = [
+    "pyinstaller==6.21.0",
+    "pyinstaller-hooks-contrib==2026.6",
+]
+dev = [
+    "pytest==9.1.1",
+    "ruff==0.15.22",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = [
+    "host",
+    "packages/*",
+    "workers/*",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+target-version = "py314"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]

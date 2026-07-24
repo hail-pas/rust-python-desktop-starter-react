@@ -1,0 +1,9 @@
+[project]
+name = "starter-worker-common"
+version = "0.5.0"
+requires-python = ">=3.13,<3.15"
+dependencies = []
+
+[build-system]
+requires = ["uv_build==0.11.31"]
+build-backend = "uv_build"

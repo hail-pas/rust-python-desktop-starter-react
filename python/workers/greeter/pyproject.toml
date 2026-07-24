@@ -1,0 +1,19 @@
+[project]
+name = "starter-worker-greeter"
+version = "0.5.0"
+requires-python = ">=3.13,<3.15"
+dependencies = [
+    "starter-worker-common",
+]
+
+[tool.uv.sources]
+starter-worker-common = { workspace = true }
+
+[tool.starter.worker]
+name = "greeter"
+module = "starter_worker_greeter.handler"
+sample-request = '{"name":"Ada Lovelace"}'
+
+[build-system]
+requires = ["uv_build==0.11.31"]
+build-backend = "uv_build"

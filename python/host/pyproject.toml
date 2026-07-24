@@ -1,0 +1,25 @@
+[project]
+name = "starter-python-host"
+version = "0.5.0"
+requires-python = ">=3.13,<3.15"
+dependencies = [
+    "starter-worker-common",
+    "starter-worker-greeter",
+    "starter-worker-statistics",
+]
+
+[project.scripts]
+python-host = "starter_python_host.__main__:main"
+
+[tool.uv.sources]
+starter-worker-common = { workspace = true }
+starter-worker-greeter = { workspace = true }
+starter-worker-statistics = { workspace = true }
+
+[tool.starter.host]
+binary-name = "python-host"
+module = "starter_python_host.__main__"
+
+[build-system]
+requires = ["uv_build==0.11.31"]
+build-backend = "uv_build"

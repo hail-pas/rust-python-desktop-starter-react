@@ -1,0 +1,41 @@
+{
+  "name": "rust-python-desktop-starter",
+  "private": true,
+  "version": "0.5.0",
+  "workspaces": [
+    "apps/desktop",
+    "frontend"
+  ],
+  "scripts": {
+    "doctor": "node scripts/doctor.mjs",
+    "frontend:dev": "npm --workspace @starter/frontend run dev",
+    "frontend:mock": "npm --workspace @starter/frontend run dev:mock",
+    "frontend:build": "npm --workspace @starter/frontend run build",
+    "frontend:typecheck": "npm --workspace @starter/frontend run typecheck",
+    "python:lock": "uv lock --directory python",
+    "python:sync": "uv sync --directory python --all-packages --all-groups",
+    "python:check-lock": "uv lock --directory python --check",
+    "python:test": "uv run --directory python --all-packages --group dev pytest",
+    "python:lint": "uv run --directory python --all-packages --group dev ruff check .",
+    "python:format": "uv run --directory python --all-packages --group dev ruff format .",
+    "python:smoke": "uv run --directory python --all-packages python scripts/smoke_host.py",
+    "python:build": "uv run --directory python --all-packages --group build python scripts/build_host.py",
+    "rust:test": "cargo test --workspace",
+    "rust:fmt": "cargo fmt --all --check",
+    "rust:clippy": "cargo clippy --workspace --all-targets --all-features -- -D warnings",
+    "desktop:dev": "npm --workspace @starter/desktop run dev",
+    "desktop:build": "npm --workspace @starter/desktop run build",
+    "desktop:compile": "npm --workspace @starter/desktop run compile",
+    "validate:structure": "uv run --directory python python ../scripts/validate_structure.py",
+    "check": "npm run validate:structure && npm run frontend:typecheck && npm run python:test && npm run python:smoke && npm run python:lint && npm run rust:test",
+    "dev": "npm run python:build && npm run desktop:dev",
+    "dev:fast": "npm run desktop:dev",
+    "build": "npm run check && npm run python:build && npm run desktop:build",
+    "verify:native": "npm run python:build && npm run desktop:compile"
+  },
+  "engines": {
+    "node": ">=24.18.0",
+    "npm": ">=11.17.0"
+  },
+  "packageManager": "npm@11.17.0"
+}
