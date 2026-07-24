@@ -120,7 +120,15 @@ def _write(response: Mapping[str, Any]) -> None:
     sys.stdout.flush()
 
 
+def _configure_standard_streams() -> None:
+    for stream in (sys.stdin, sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8")
+
+
 def run_forever() -> None:
+    _configure_standard_streams()
+
     for raw_line in sys.stdin:
         raw_line = raw_line.strip()
         if not raw_line:

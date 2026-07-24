@@ -94,7 +94,7 @@ def smoke_binary(binary: Path) -> None:
         input=stdin,
         check=False,
         capture_output=True,
-        text=True,
+        encoding="utf-8",
         timeout=90,
     )
     if result.returncode != 0:

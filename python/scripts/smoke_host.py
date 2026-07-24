@@ -27,6 +27,9 @@ def build_input() -> tuple[str, list[str]]:
 
 
 def main() -> None:
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
+
     host = discover_host()
     stdin, request_ids = build_input()
     result = subprocess.run(
@@ -34,7 +37,7 @@ def main() -> None:
         input=stdin,
         check=False,
         capture_output=True,
-        text=True,
+        encoding="utf-8",
         timeout=30,
     )
     if result.returncode != 0:
